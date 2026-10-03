@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habitual - Habit Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-screen" id="authScreen">
+  <div class="auth-card">
+    <div class="auth-brand">Habitual</div>
+    <h1 id="authTitle">Welcome back</h1>
+    <p class="auth-subtitle" id="authSubtitle">Log in to continue to your dashboard.</p>
+
+    <form id="authForm">
+      <div id="signupUsernameGroup" class="auth-field signup-only">
+        <label for="authUsername">Username</label>
+        <input id="authUsername" type="text" placeholder="Choose a username" autocomplete="username" maxlength="30">
+      </div>
+
+      <label>Email</label>
+      <input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+
+      <label>Password</label>
+      <input id="authPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+
+      <div id="signupConfirmGroup" class="auth-field signup-only">
+        <label for="authConfirmPassword">Confirm Password</label>
+        <input id="authConfirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password">
+      </div>
+
+      <button class="auth-submit" type="submit" id="authSubmit">Log In</button>
+    </form>
+
+    <button class="forgot-password" type="button" id="forgotPassword">Forgot Password?</button>
+
+    <button class="auth-switch" type="button" id="authSwitch">
+      Don't have an account? Sign Up
+    </button>
+    <p class="auth-error" id="authError"></p>
+  </div>
+</div>
+
+
+<!-- Login / Sign Up screen -->
+
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brand-icon">H</div><span>Habitual</span></div>
+  <nav class="navigation">
+    <a href="#dashboard" class="nav-link active" data-section="dashboard"><span>⌂</span>Dashboard</a>
+    <a href="#habits" class="nav-link" data-section="habits"><span>✓</span>My Habits</a>
+    <a href="#progress" class="nav-link" data-section="progress"><span>▥</span>Progress</a>
+    <a href="#history" class="nav-link" data-section="history"><span>◷</span>History</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="theme-btn" id="themeBtn">☾ <span id="themeText">Dark Mode</span></button>
+    <div class="sidebar-footer">Habitual v2.0</div>
+  </div>
+
+<div class="account-box" id="accountBox">
+  <div class="account-avatar" id="accountAvatar">U</div>
+  <div class="account-info">
+    <strong id="accountName">User</strong>
+    <span id="accountEmail"></span>
+  </div>
+</div>
+<button id="sidebarLogout" class="sidebar-logout" type="button">Log Out</button>
+
+</aside>
+
+<main class="main">
+<header class="mobile-header">
+  <button class="menu-btn" id="menuBtn">☰</button>
+  <div class="mobile-brand"><div class="brand-icon">H</div><span>Habitual</span></div>
+</header>
+
+<section class="page-section active" id="dashboard">
+  <div class="page-header">
+    <div><p class="eyebrow">WELCOME BACK</p><h1>Good day! 👋</h1><p class="date-text" id="currentDate"></p></div>
+    <button class="primary-btn" id="openAddHabit">＋ Add Habit</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon purple">✓</div><div><span>Today's Progress</span><strong id="todayProgress">0%</strong></div></div>
+    <div class="stat-card"><div class="stat-icon orange">🔥</div><div><span>Best Streak</span><strong id="bestStreak">0 days</strong></div></div>
+    <div class="stat-card"><div class="stat-icon blue">☑</div><div><span>Completed Today</span><strong id="completedToday">0 / 0</strong></div></div>
+    <div class="stat-card"><div class="stat-icon green">★</div><div><span>Total Habits</span><strong id="totalHabits">0</strong></div></div>
+  </div>
+
+  <div class="content-grid">
+    <div class="panel">
+      <div class="panel-header"><div><h2>Today's Habits</h2><p>Keep your momentum going.</p></div><button class="text-btn" data-section-link="habits">View All</button></div>
+      <div id="todayHabits" class="habit-list"></div>
+      <div id="emptyToday" class="empty-state"><div class="empty-icon">✓</div><h3>No habits yet</h3><p>Add your first habit to start tracking.</p><button class="primary-btn" id="emptyAddHabit">Add Your First Habit</button></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><div><h2>This Week</h2><p>Your weekly activity.</p></div></div>
+      <div class="week-chart" id="weekChart"></div>
+      <div class="weekly-summary"><span>Weekly completion</span><strong id="weeklyCompletion">0%</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="habits">
+  <div class="page-header"><div><p class="eyebrow">YOUR ROUTINE</p><h1>My Habits</h1><p class="date-text">Build better routines one day at a time.</p></div><button class="primary-btn" id="openAddHabit2">＋ Add Habit</button></div>
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="health">Health</button>
+    <button class="filter-btn" data-filter="study">Study</button>
+    <button class="filter-btn" data-filter="personal">Personal</button>
+    <button class="filter-btn" data-filter="fitness">Fitness</button>
+  </div>
+  <div id="allHabits" class="all-habits-grid"></div>
+  <div id="emptyAll" class="empty-state large"><div class="empty-icon">＋</div><h3>No habits found</h3><p>Create a habit and start building your routine.</p></div>
+</section>
+
+<section class="page-section" id="progress">
+  <div class="page-header"><div><p class="eyebrow">YOUR PERFORMANCE</p><h1>Progress</h1><p class="date-text">See how consistent you've been.</p></div></div>
+  <div class="progress-grid">
+    <div class="panel"><div class="panel-header"><div><h2>Weekly Overview</h2><p>Completion rate for the last 7 days.</p></div></div><div id="largeWeekChart" class="large-week-chart"></div></div>
+    <div class="panel"><div class="panel-header"><div><h2>Statistics</h2><p>Your overall numbers.</p></div></div>
+      <div class="statistics">
+        <div class="stat-line"><span>Total Completions</span><strong id="totalCompletions">0</strong></div>
+        <div class="stat-line"><span>Average Completion</span><strong id="averageCompletion">0%</strong></div>
+        <div class="stat-line"><span>Best Streak</span><strong id="progressBestStreak">0 days</strong></div>
+        <div class="stat-line"><span>Active Habits</span><strong id="activeHabits">0</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="history">
+  <div class="page-header"><div><p class="eyebrow">ACTIVITY</p><h1>History</h1><p class="date-text">Review your previous habit activity.</p></div></div>
+  <div class="panel"><div class="panel-header"><div><h2>Recent Activity</h2><p>Your latest completed habits.</p></div></div><div id="historyList" class="history-list"></div><div id="emptyHistory" class="empty-state"><div class="empty-icon">◷</div><h3>No activity yet</h3><p>Your completed habits will appear here.</p></div></div>
+</section>
+</main>
+
+<div class="modal-overlay" id="habitModal">
+  <div class="modal">
+    <div class="modal-header"><div><p class="eyebrow">HABIT</p><h2 id="modalTitle">Create a Habit</h2></div><button class="close-btn" id="closeModal">×</button></div>
+    <form id="habitForm">
+      <input type="hidden" id="habitId">
+      <div class="form-group"><label for="habitName">Habit Name</label><input type="text" id="habitName" placeholder="e.g. Read for 20 minutes" maxlength="50" required></div>
+      <div class="form-row">
+        <div class="form-group"><label for="habitCategory">Category</label><select id="habitCategory"><option value="personal">Personal</option><option value="health">Health</option><option value="study">Study</option><option value="fitness">Fitness</option></select></div>
+        <div class="form-group"><label for="habitIcon">Icon</label><select id="habitIcon"><option value="✓">✓ Check</option><option value="📚">📚 Study</option><option value="💧">💧 Water</option><option value="🏃">🏃 Exercise</option><option value="📖">📖 Read</option><option value="🧘">🧘 Meditation</option><option value="💻">💻 Coding</option><option value="😴">😴 Sleep</option><option value="🍎">🍎 Healthy</option></select></div>
+      </div>
+      <div class="form-group"><label>Repeat On</label><div class="days-selector">
+        <label><input type="checkbox" value="1" class="day-checkbox" checked><span>M</span></label>
+        <label><input type="checkbox" value="2" class="day-checkbox" checked><span>T</span></label>
+        <label><input type="checkbox" value="3" class="day-checkbox" checked><span>W</span></label>
+        <label><input type="checkbox" value="4" class="day-checkbox" checked><span>T</span></label>
+        <label><input type="checkbox" value="5" class="day-checkbox" checked><span>F</span></label>
+        <label><input type="checkbox" value="6" class="day-checkbox"><span>S</span></label>
+        <label><input type="checkbox" value="0" class="day-checkbox"><span>S</span></label>
+      </div></div>
+      <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Save Habit</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastIcon">✓</span><span id="toastMessage">Saved!</span></div>
+<script src="script.js"></script>
+</body>
+</html>
